@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <h1>Отзывы</h1>
+    <div id="reviewsContainer">
+        <!-- Отзывы будут отображаться здесь -->
+    </div>
+
+    <script>
+        // Получение отзывов из localStorage
+        const reviews = JSON.parse(localStorage.getItem("reviews")) || [];
+        
+        // Функция для отображения отзывов
+        function showReviews() {
+            const reviewsContainer = document.getElementById("reviewsContainer");
+            reviewsContainer.innerHTML = ""; // Очищаем контейнер
+            reviews.forEach(review => {
+                const reviewElement = document.createElement("div");
+                reviewElement.innerHTML = `
+                <h3 class="text" >${review.productName}</h3>
+            <p>${review.reviewText}</p>
+            <button class="del"  >Удалить отзыв</button> 
+                `;
+                reviewsContainer.appendChild(reviewElement);
+            });
+        }
+        
+        // Вызываем функцию для отображения отзывов
+        showReviews();
+        const text=document.querySelector('.text') 
+const delBtn=document.querySelector('.del')
+        delBtn.addEventListener('click',deleteReview) 
+           
+        
+        
+
+        function deleteReview(index) {
+  let reviews = JSON.parse(localStorage.getItem("reviews")) || [];
+  reviews.splice(index, 1); // Удаляем отзыв из массива
+  localStorage.setItem("reviews", JSON.stringify(reviews)); // Обновляем отзывы в localStorage
+  showReviews(); // Обновляем отображение отзывов
+}
+    </script>
+    <script src="app.js"></script>
+    </div>
+  </body>
+</html>
